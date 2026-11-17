@@ -1,0 +1,284 @@
+:root {
+  --background: #f8f5ed;
+  --text: #342e27;
+  --accent: #52683e;
+  --text-muted: #5e5d53;
+  --border: #cdc9bb;
+  --card: #ffffff96;
+  --shadow: 0 6px 24px rgba(70, 61, 45, 0.10);
+  --grid-color: rgba(93, 103, 75, .065);
+
+  --font-logo: "Baloo 2", sans-serif;
+  --font-sans: "DM Sans", "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
+body {
+  min-width: 320px;
+  padding-block: 1.25rem;
+
+  color: var(--text);
+  font-family: var(--font-sans);
+
+  background-color: var(--background);
+  background-image:
+    linear-gradient(to right,
+      var(--grid-color) 1px,
+      transparent 1px),
+    linear-gradient(to bottom,
+      var(--grid-color) 1px,
+      transparent 1px);
+  background-size: 24px 24px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: solid 2px var(--accent);
+    outline-offset: 5px;
+  }
+}
+
+.container {
+  width: 100%;
+  padding-inline: 1rem;
+  margin-inline: auto;
+}
+/*
+  外部リンクの「↗」は見た目だけの印なので、HTML に書かず CSS で付ける。
+  content の「/」の後ろは読み上げ用の文字で、空にすると読み上げられない。
+  1行目は「/」に対応していない古いブラウザ向け（矢印が読まれるだけで、表示は同じ）。
+*/
+.button::after {
+  content: "↗";
+  content: "↗" / "";
+}
+
+/* 文字のリンクは下線が途切れないよう、余白ではなく改行しない空白（\00a0）で間を空ける */
+.text-link::after {
+  content: "\00a0↗";
+  content: "\00a0↗" / "";
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+
+  padding-block: 0.5rem;
+  margin-block-end: 2rem;
+}
+
+.header__title {
+  font-family: var(--font-logo);
+  font-weight: 800;
+  font-size: clamp(2rem, 1.25rem + 4vw, 4rem);
+  line-height: 1;
+}
+
+/* Content */
+
+.content {
+  display: grid;
+  gap: 2rem;
+}
+
+.section {
+  padding: 1.5rem;
+
+  background: var(--card);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+.section__title {
+  margin-block-end: 1.5rem;
+
+  font-weight: 700;
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  line-height: 1.3;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.tags__item {
+  padding: 0.125rem 0.5rem;
+
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+
+  border: solid 1px var(--border);
+  border-radius: 2px;
+}
+
+/* Works */
+
+.projects {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  block-size: 100%;
+}
+
+.project__visual {
+  display: block;
+  aspect-ratio: 8 / 5;
+  overflow: hidden;
+
+  background: #dce5d9;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.project__image {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.project__info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.project__title {
+  font-weight: 700;
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.project__description {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+.project__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  padding-block-start: 0.5rem;
+  margin-block-start: auto;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  min-block-size: 3rem;
+  padding: 0.5rem 1.25rem;
+
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #fff;
+
+  background: var(--accent);
+  border-radius: 4px;
+
+  &:hover {
+    background: var(--text);
+  }
+}
+
+.text-link {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+
+  &:hover {
+    color: var(--text);
+  }
+}
+
+/* About & Skills */
+
+.profile {
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+.profile__text {
+  font-size: 1rem;
+  line-height: 1.6;
+
+  > * + * {
+    margin-block-start: 1em;
+  }
+}
+
+.skills > * + * {
+  margin-block-start: 1.5rem;
+}
+
+.skills__title {
+  padding-block-end: 0.5rem;
+
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+/* Footer */
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding-block: 2.25rem;
+
+  color: var(--text-muted);
+}
+
+.footer__copyright {
+  font-size: 0.875rem;
+}
+
+/* 48rem = 768px */
+@media (min-width: 48rem) {
+  body {
+    padding-block: 2rem;
+  }
+
+  .container {
+    width: min(100% - 5rem, 90rem);
+    padding-inline: 0;
+  }
+
+  .section {
+    padding: 2rem;
+  }
+
+  .projects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 2rem;
+  }
+
+  .profile {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
